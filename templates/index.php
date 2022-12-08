@@ -1,18 +1,24 @@
-{% extends 'base.html' %} {% block title %}
+<?php include('base.php');
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    header("Location:login.php");
+};
+?>
+
 <title>
     Home
 </title>
 <link rel="stylesheet" href="/static/css/home.css">
 <link rel="stylesheet" href="/static/css/profile.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="{{url_for('static', filename='js/read_more.js')}}"></script>{% endblock %} {% block body %}
+<script src="/static/js/read_more.js"></script>
 
+<?php include('navbar.php') ?>
 <div class="container-fluid ">
 
     <div class="row">
-        <nav class="navbar navbar-light bg-light">
-            <span class="navbar-brand mb-0 h1 ps-1">{{ content.panel1 }}</span>
-        </nav>
+
         <!-- Left Container -->
         <div class="col-sm-9 border">
 
@@ -64,7 +70,6 @@
 
 
                         <div class="border-top border-bottom">
-                            {% for title, body in articles %}
                             <div class="row">
                                 <div class="col ">
                                     <p class="h4 text-center mt-3 mb-6">{{title}}</p>
@@ -76,7 +81,10 @@
                             </div>
                             <div class="row">
                                 <div class="col m-more-less-content">
-                                    <p class="mb-4 justify-content">{{body }} </p>
+                                    <p class="mb-4 justify-content">
+
+                                        {{body }}
+                                    </p>
 
                                 </div>
 
@@ -101,7 +109,8 @@
                     <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
                         <div class="card1 p-4">
                             <div class=" image1 d-flex flex-column justify-content-center align-items-center">
-                                <img src="{{ img_url }}" height="100" width="100" class="rounded img-thumbnail img-fluid" /></button> <span class="name mt-3">Hello, {{session.get('name')}}</span> <span class="idd">{{session.get('email')}}</span>
+                                <img src="{{ img_url }}" height="100" width="100" class="rounded img-thumbnail img-fluid" /></button> <span class="name mt-3">Hello, <?php session_start();
+                                                                                                                                                                        echo $_SESSION['username']; ?></span> <span class="idd">{{session.get('email')}}</span>
                                 <div class="d-flex flex-row justify-content-center align-items-center gap-2"> <span class="idd1">Oxc4c16a645_b21a</span> <span><i class="fa fa-copy"></i></span> </div>
                                 <div class="d-flex flex-row justify-content-center align-items-center mt-3"> <span class="number">1069 <span class="follow">Followers</span></span>
                                 </div>
@@ -332,5 +341,3 @@
         }
     }
 </script>
-
-{% endblock %}
