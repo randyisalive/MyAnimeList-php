@@ -1,9 +1,5 @@
 <?php include('base.php');
-session_start();
 
-if (!isset($_SESSION['username'])) {
-    header("Location:login.php");
-};
 ?>
 
 <title>
@@ -109,9 +105,25 @@ if (!isset($_SESSION['username'])) {
                     <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
                         <div class="card1 p-4">
                             <div class=" image1 d-flex flex-column justify-content-center align-items-center">
-                                <img src="{{ img_url }}" height="100" width="100" class="rounded img-thumbnail img-fluid" /></button> <span class="name mt-3">Hello, <?php session_start();
-                                                                                                                                                                        echo $_SESSION['username']; ?></span> <span class="idd">{{session.get('email')}}</span>
-                                <div class="d-flex flex-row justify-content-center align-items-center gap-2"> <span class="idd1">Oxc4c16a645_b21a</span> <span><i class="fa fa-copy"></i></span> </div>
+                                <img src="{{ img_url }}" height="100" width="100" class="rounded img-thumbnail img-fluid" /></button> <span class="name mt-3">Hello, 
+                                    
+                                    <?php   if (isset($_SESSION['username'])) {
+                                        echo $_SESSION['username'];
+
+                                    } else {
+                                        echo "<p class=text-danger>Guest</p>";
+                                    }
+                                    
+                                     ?></span> <span class="idd"><?php   ?></span>
+                                <div class="d-flex flex-row justify-content-center align-items-center gap-2"> <span class="idd1">
+                                    <?php  
+                                    if (isset($_SESSION['email'])) {
+                                         echo $_SESSION['email']; 
+                                    } else {
+                                        echo "<a href=edit_profile.php>Add your email!!</a>";
+                                    }
+                                    
+                                   ?></span> <span><i class="fa fa-copy"></i></span> </div>
                                 <div class="d-flex flex-row justify-content-center align-items-center mt-3"> <span class="number">1069 <span class="follow">Followers</span></span>
                                 </div>
                                 <div class=" d-flex mt-2"> <button class="btn2 btn-dark"> <a href="{{url_for('auth.edit_profile', name=session.get('name'))}}" class="text-decoration-none text-white">Edit Profile</a> </button> </div>
@@ -323,6 +335,10 @@ if (!isset($_SESSION['username'])) {
 
 
 </div>
+<?php 
+include('../templates/footer.php');
+
+?>
 
 <script>
     function myFunction() {

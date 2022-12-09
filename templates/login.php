@@ -39,25 +39,26 @@ include('db.php');
             <div class="row">
                 <div class="col">
                     <div class="container border-top ">
-                        <form action="process_login.php" method="post">
+                        <form action="../templates/process/process_login.php" method="post">
                             <div class="container mb-3 mt-3">
                                 <div class="form-floating">
-                                    <input type="text" placeholder="Username..." class="form-control" name="username">
+                                    <input type="text" placeholder="Username..." class="form-control" name="username" required>
                                     <label for="floatingInput">Username</label>
                                 </div>
                             </div>
                             <div class="container mb-3 mt-3">
                                 <div class="form-floating">
-                                    <input type="password" placeholder="Password..." class="form-control" name="password">
+                                    <input type="password" placeholder="Password..." class="form-control" name="password" required>
                                     <label>Password</label>
                                 </div>
                             </div>
-                            {% for messages in get_flashed_messages() %}
+                            
                             <div class="container text-center text-danger">
-                                <h6>{{messages}}</h6>
+                                <h6><?php if (isset($_SESSION['flash_error'])) {
+                                    echo $_SESSION['flash_error'];
+                                }; ?></h6>
 
                             </div>
-                            {% endfor %}
 
 
                             <div class="text-center container mb-5 mt-3">
@@ -71,7 +72,7 @@ include('db.php');
                             <a href="" class="text-decoration-none">Forgot Username?</a>
                         </div>
                         <div class="container text-center mt-5 mb-5">
-                            <a href="{{url_for('auth.signup')}}" class="btn btn-outline-primary">Sing Up</a>
+                            <a href="./signup.php" class="btn btn-outline-primary">Sing Up</a>
 
                         </div>
                     </div>

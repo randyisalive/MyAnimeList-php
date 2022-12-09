@@ -1,7 +1,8 @@
-{% extends 'base.html' %} {% block title %}
+<?php include ('base.php')
+?>
 <title>Signup</title>
-{% endblock %} {% block body %}
 
+<?php include('navbar.php') ?>
 <div class="container border">
     <div class="row">
         <div class="col-3 ">
@@ -17,31 +18,41 @@
             <div class="row">
                 <div class="col">
                     <div class="container border-top ">
-                        <form action="{{url_for('auth.signup')}}" method="POST">
+                        <form action="../templates/process/process_signup.php" method="POST">
                             <div class="container mb-3 mt-3">
                                 <div class="form-floating">
-                                    <input type="text" placeholder="Username..." class="form-control" name="username">
+                                    <input type="text" placeholder="Username" class="form-control" name="username" required>
                                     <label for="floatingInput">Username</label>
                                 </div>
                             </div>
                             <div class="container mb-3 mt-3">
                                 <div class="form-floating">
-                                    <input type="email" placeholder="Password..." class="form-control" name="email">
+                                    <input type="email" placeholder="Email" class="form-control" name="email" required>
                                     <label>Email</label>
                                 </div>
                             </div>
                             <div class="container mb-3 mt-3">
                                 <div class="form-floating">
-                                    <input type="password" placeholder="Password..." class="form-control" name="password">
+                                    <input type="password" placeholder="Password" class="form-control" name="password" required>
                                     <label>Password</label>
                                 </div>
                             </div>
-                            {% for messages in get_flashed_messages() %}
+                            <div class="container mb-3 mt-3">
+                                <div class="form-floating">
+                                    <input type="text" placeholder="Re-Enter password" class="form-control" name="re_enter" required>
+                                    <label>Re-Enter Password</label>
+                                </div>
+                            </div>
                             <div class="container text-center text-danger">
-                                <h6>{{messages}}</h6>
+                                
+                                <h6><?php
+                                if (isset($_SESSION['flash_error_signup'])) {
+                                     echo $_SESSION['flash_error_signup'];
+                                }                                   
+                                
+                                ?></h6>
 
                             </div>
-                            {% endfor %}
 
 
                             <div class="text-center container mb-5 mt-3">
@@ -52,7 +63,7 @@
                         </form>
 
                         <div class="container text-center mt-5 mb-5">
-                            <a href="{{ url_for('auth.login') }}" class="btn btn-outline-primary">Log In</a>
+                            <a href="../templates/login.php" class="btn btn-outline-primary">Log In</a>
 
                         </div>
                     </div>
@@ -71,4 +82,4 @@
 </div>
 
 
-{% endblock %}
+<?php include('footer.php') ?>
