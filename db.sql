@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2022 at 12:06 AM
+-- Generation Time: Dec 10, 2022 at 05:40 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -25,45 +25,9 @@ CREATE TABLE `article` (
   `id` int(15) NOT NULL,
   `title` varchar(255) NOT NULL,
   `body` varchar(255) NOT NULL,
-  `users_id` int(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `forum`
---
-
-CREATE TABLE `forum` (
-  `id` int(15) NOT NULL,
-  `title` varchar(255) NOT NULL,
   `users_id` int(15) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `body` varchar(255) NOT NULL
+  `posted_time` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `id` int(15) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `created_time` date NOT NULL DEFAULT current_timestamp(),
-  `picture_profile` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `username`, `password`, `email`, `created_time`, `picture_profile`) VALUES
-(1, 'admin', 'admin\r\n', NULL, '2022-12-10', NULL),
-(2, 'rei', 'rei', 'rei@gmail.com', '2022-12-10', NULL);
 
 --
 -- Indexes for dumped tables
@@ -77,20 +41,6 @@ ALTER TABLE `article`
   ADD UNIQUE KEY `users_id` (`users_id`);
 
 --
--- Indexes for table `forum`
---
-ALTER TABLE `forum`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `users_id` (`users_id`),
-  ADD KEY `username` (`username`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -98,17 +48,15 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `article`
 --
 ALTER TABLE `article`
-  MODIFY `id` int(15) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `forum`
---
-ALTER TABLE `forum`
-  MODIFY `id` int(15) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
   MODIFY `id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `article`
+--
+ALTER TABLE `article`
+  ADD CONSTRAINT `article_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;

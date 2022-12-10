@@ -122,7 +122,7 @@ session_start();
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link " href="/article/create">Create Article</a>
+                    <a class="nav-link " href="../templates/article/create.php">Create Article</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href="/article/create">Add New Forum</a>

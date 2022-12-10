@@ -1,7 +1,11 @@
-{% extends 'base.html' %} {% block title %} {% endblock %} {% block body %}
-<nav class="navbar navbar-light bg-light">
-    <span class="navbar-brand mb-0 h1 ps-1">{{ content.panel5 }}</span>
-</nav>
+<?php
+
+include('../base.php');
+
+include('../navbar.php');
+?>
+
+<br>
 
 <div class="container border">
     <div class="container">
@@ -20,7 +24,7 @@
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <div class="container-fluid align-content-center">
                     <div class="container">
-                        <form action="" method="POST" class="form-control mt-5 mb-8">
+                        <form action="../../templates/process/process_article.php" method="POST" class=" mt-5 mb-8">
                             <div class="container mt-3">
                                 <h5>Create Article Entry</h5>
                             </div>
@@ -31,27 +35,17 @@
                                         <div class="col">
                                             <div class="container">
                                                 <small class="ms-1">Enter Title</small>
-                                                <input type="text" placeholder="Title..." name="title" class="form-control mt-2">
+                                                <input type="text" placeholder="Title..." name="title" class="form-control mt-2" required>
                                             </div>
                                         </div>
-                                        <div class="col-4">
-                                            <div class="container">
-                                                <small class="ms-1">Set Privacy:</small>
-                                                <select class="form-select mt-2" aria-label="Default select example">
-                                                    <option selected>Open this select menu</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
-                                                  </select>
-                                            </div>
-                                        </div>
+                                       
                                     </div>
                                     <div class="row">
                                         <div class="col mt-4">
                                             <div class="container">
                                                 <small class="ms-1">Entry Text:</small>
                                                 <div class="form-floating mt-3">
-                                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="body"></textarea>
+                                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="body" required></textarea>
                                                     <label for="floatingTextarea2">Article</label>
                                                 </div>
                                             </div>
@@ -87,8 +81,10 @@
     </div>
 
 </div>
+<?php 
+include('../footer.php')
+?>
 
 
 
 
-{% endblock %}

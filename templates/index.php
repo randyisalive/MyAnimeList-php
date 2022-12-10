@@ -1,4 +1,5 @@
 <?php include('base.php');
+include('db.php');
 
 ?>
 
@@ -25,22 +26,21 @@
                     </div>
                     <!-- image top container -->
                     <div class="image-container border-top row mt-3">
+                        <?php
+                        $sql = "SELECT * FROM anime_newest";
+                        $result = mysqli_query($db_connection, $sql);
+                        if ($result -> num_rows > 0) 
+                        {
+                            while ($row = $result -> fetch_assoc()) {
+                                echo '<div class="col">
+                            <img src="../static/img/'?><?=$row['picture_name']; ?> <?='" class="img-panel img-fluid mx-auto d-block" alt="...">
+                            <p class="text-center h6">'?><?=$row['picture_title'];?><?='</p>
 
-                        <div class="col">
-                            <img src="{{ url_for('static', filename='/img/Test_image.jpg') }}" class="img-panel img-fluid mx-auto d-block" alt="...">
-                            <p class="text-center h6">Image title</p>
-
-                        </div>
-                        <div class="col">
-                            <img src="{{ url_for('static', filename='/img/Test_image.jpg') }}" class="img-panel img-fluid mx-auto d-block" alt="...">
-                            <p class="text-center h6">Image title</p>
-
-                        </div>
-                        <div class="col">
-                            <img src="{{ url_for('static', filename='/img/Test_image.jpg') }}" class="img-panel img-fluid mx-auto d-block" alt="...">
-                            <p class="text-center h6">Image title</p>
-                        </div>
-                    </div>
+                        </div>';
+                            }
+                        }
+                        
+                        ?>
                     <!-- image top container -->
                 </div>
 

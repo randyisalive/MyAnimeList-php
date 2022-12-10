@@ -1,4 +1,7 @@
-{% extends 'base.html' %} {% block title %}
+<?php
+include('../../templates/base.php');
+?>
+
 <title>Article</title>
 <style>
     a:hover {
